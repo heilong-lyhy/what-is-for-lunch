@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>随机渐入渐出文字特效</title>
+  <style>
+    .floating-text {
+      position: absolute;
+      color: #000;
+      opacity: 0; /* 初始不可见 */
+      transition: opacity 2s; /* 添加渐入渐出过渡效果，持续1秒 */
+    }
+  </style>
+</head>
+<body>
+  <button id="startButton">开始特效</button>
+
+  <script>
+    const startButton = document.getElementById("startButton");
+    const body = document.body;
+    let isAnimating = false;
+
+    // 您定义的文字
+    const yourTexts = ["文本1", "文本2", "文本3", "文本4", "文本5"];
+
+    startButton.addEventListener("click", () => {
+      if (isAnimating) {
+        // 停止特效
+        isAnimating = false;
+        startButton.textContent = "开始特效";
+      } else {
+        // 开始特效
+        isAnimating = true;
+        startButton.textContent = "归队";
+        animateText();
+      }
+    });
+
+    function animateText() {
+      if (isAnimating) {
+        for (let i = 0; i < 3; i++) { // 创建三个文本
+          const randomIndex = Math.floor(Math.random() * yourTexts.length);
+          const randomText = yourTexts[randomIndex];
+          const textElement = document.createElement("div");
+          textElement.textContent = randomText;
+          textElement.className = "floating-text";
+
+          // 设置随机位置
+          const maxX = window.innerWidth - textElement.clientWidth;
+          const maxY = window.innerHeight - textElement.clientHeight;
+          const randomX = Math.random() * maxX;
+          const randomY = Math.random() * maxY;
+          textElement.style.left = randomX + "px";
+          textElement.style.top = randomY + "px";
+
+          // 设置随机字体大小
+          const randomSize = Math.floor(Math.random() * 30) + 12;
+          textElement.style.fontSize = randomSize + "px";
+
+          // 添加文本到页面
+          body.appendChild(textElement);
+
+          // 渐入效果
+          setTimeout(() => {
+            textElement.style.opacity = 1;
+          }, 0);
+
+          // 自动移除文本
+          setTimeout(() => {
+            // 渐出效果
+            textElement.style.opacity = 0;
+            setTimeout(() => {
+              body.removeChild(textElement);
+            }, 2000); // 渐出效果持续2秒
+          }, 2000); // 文本显示2秒后移除
+        }
+
+        // 继续下一个文本的动画
+        setTimeout(animateText, 2000);
+      }
+    }
+  </script>
+</body>
+</html>
