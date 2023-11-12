@@ -43,10 +43,6 @@ span{
   /* background-repeat: no-repeat; */
 }
 
-.s-title{
-  
-}
-
 /* #float-text{
   position: absolute;
   top: 0px;
@@ -55,6 +51,7 @@ span{
   left: 0px;
   font-size: 0px;
 } */
+
 .floating-text {
   position: absolute;
   color: #000;
