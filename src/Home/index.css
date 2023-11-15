@@ -43,14 +43,12 @@ span{
   /* background-repeat: no-repeat; */
 }
 
-/* #float-text{
+.float-text{
   position: absolute;
   top: 0px;
-  right: 0px;
-  bottom: 0px;
   left: 0px;
   font-size: 0px;
-} */
+}
 
 .floating-text {
   position: absolute;

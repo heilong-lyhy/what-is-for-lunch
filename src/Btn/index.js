@@ -1,10 +1,15 @@
 import './index.css';
-import { useState } from 'react';
+// import { useState } from 'react';
 
-function Btn({ic,click}){
-  
+function Btn({ic,click,text}){
+  let btntext = ''
+  if(ic){
+    btntext = '结束'
+  }else{
+    btntext = '开始'
+  }
   return(
-    <button onClick={click}>{ic}</button>
+    <button onClick={click}>{btntext},{text}</button>
   )
 }
 

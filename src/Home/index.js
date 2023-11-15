@@ -1,26 +1,35 @@
 import './index.css';
 import { useState } from 'react';
 import Btn from '../Btn'
+// import React, { Component } from 'react';
 
 function Home(){
+  // const [istime, setistime] = useState(0);
   // const [isclick, setisclick] = useState(false);
-  let foudlist = ['1','2','3']
+  let isclick = false;
+  let foudlist = ['1','2','3'];
   const body = document.body;
-  let isclick = false
-  let btntext = '' 
+  let text = ''
   if(isclick){
-    btntext = '结束'
+    text = '结束'
   }else{
-    btntext = '开始'
+    text = '开始'
   }
+  
+  
 
+  // setTimeout(() => {
+  //   setistime(istime+1)
+  //   console.log(istime)
+  // }, 1000);
   function click(){
     if(isclick){
       // setisclick(false)
-      isclick = false
+      isclick = false;
+      // clear();
     }else{
       // setisclick(true)
-      isclick = true
+      isclick = true;
       clicktime();
     }
   }
@@ -28,10 +37,10 @@ function Home(){
 
   function clicktime() {
     if(isclick){
-      for (let i = 0; i < 1; i++) { // 创建三个文本
+      for (let i = 0; i < 2; i++) { // 创建2个文本
         const randomIndex = Math.floor(Math.random() * foudlist.length);
         const randomText = foudlist[randomIndex];
-        const textElement = document.createElement("div");
+        let textElement = document.createElement("div");
         textElement.textContent = randomText;
         textElement.className = "floating-text";
 
@@ -43,7 +52,7 @@ function Home(){
         textElement.style.left = randomX + "px";
         textElement.style.top = randomY + "px";
 
-        // 设置随机字体大小
+        // // 设置随机字体大小
         const randomSize = Math.floor(Math.random() * 30) + 12;
         textElement.style.fontSize = randomSize + "px";
 
@@ -53,7 +62,7 @@ function Home(){
         // 渐入效果
         setTimeout(() => {
           textElement.style.opacity = 1;
-        }, 0);
+        }, 1000);
 
         // 自动移除文本
         setTimeout(() => {
@@ -61,7 +70,7 @@ function Home(){
           textElement.style.opacity = 0;
           setTimeout(() => {
             body.removeChild(textElement);
-          }, 2000); // 渐出效果持续2秒
+          }, 1000); // 渐出效果持续2秒
         }, 2000); // 文本显示2秒后移除
       }
 
@@ -75,12 +84,11 @@ function Home(){
 
 
 
-
   return(
     <>
       <div className="main">
         <span className='s-title'>今天中午吃<h3>什么</h3></span>
-        <Btn ic={btntext} click={click}/>
+        <Btn ic={isclick} click={click} text={text}/>
       </div>
     </>
   )
