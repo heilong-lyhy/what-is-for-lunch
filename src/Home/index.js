@@ -4,9 +4,9 @@ import Btn from '../Btn'
 // import React, { Component } from 'react';
 
 function Home(){
-  // const [istime, setistime] = useState(0);
-  // const [isclick, setisclick] = useState(false);
-  let isclick = false;
+  const [istime, setistime] = useState('什么');
+  const [isclick, setisclick] = useState(true);
+  // let isclick = false;
   let foudlist = ['1','2','3'];
   const body = document.body;
   let text = ''
@@ -17,29 +17,32 @@ function Home(){
   }
   
   
-
+  
+  //以下为点击按钮后背景渐入渐出文字的函数
   // setTimeout(() => {
   //   setistime(istime+1)
   //   console.log(istime)
   // }, 1000);
   function click(){
     if(isclick){
-      // setisclick(false)
-      isclick = false;
+      setisclick(n => n=false)
+      // isclick = false;
       // clear();
-    }else{
-      // setisclick(true)
-      isclick = true;
       clicktime();
+    }else{
+      setisclick(n => n=true)
+      // isclick = true;
+      
     }
   }
 
 
   function clicktime() {
     if(isclick){
-      for (let i = 0; i < 2; i++) { // 创建2个文本
+      for (let i = 0; i < 1; i++) { // 创建1个文本
         const randomIndex = Math.floor(Math.random() * foudlist.length);
         const randomText = foudlist[randomIndex];
+        setistime(randomText)
         let textElement = document.createElement("div");
         textElement.textContent = randomText;
         textElement.className = "floating-text";
@@ -80,15 +83,39 @@ function Home(){
   }
 
 
+  //以下内容为实现列表自定义的函数
+  function pushlist(){
+    let newlist1 = prompt('请输入新的列表项','')
+      foudlist.push(newlist1)
+      console.log(foudlist)
+  }
 
+  function poplist(){
+    let newlist2 = prompt('请输入新的列表项','')
+      foudlist.pop(newlist2)
+      console.log(foudlist)
+  }
+
+  function showlist(){
+    console.log(foudlist)
+  }
+
+  function clearlist(){
+    foudlist = []
+    console.log(foudlist)
+  }
 
 
 
   return(
     <>
       <div className="main">
-        <span className='s-title'>今天中午吃<h3>什么</h3></span>
+        <span className='s-title'>今天中午吃<h3>{istime}</h3></span>
         <Btn ic={isclick} click={click} text={text}/>
+        <Btn text={'添加列表项'} click={pushlist}/>
+        <Btn text={'删除列表项'} click={poplist}/>
+        <Btn text={'显示当前列表'} click={showlist}/>
+        <Btn text={'清空当前列表'} click={clearlist}/>
       </div>
     </>
   )
