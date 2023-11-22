@@ -6,8 +6,9 @@ import Btn from '../Btn'
 function Home(){
   const [istime, setistime] = useState('什么');
   const [isclick, setisclick] = useState(true);
+  const [foudlist, setfoudlist] = useState(['1','2','3'])
   // let isclick = false;
-  let foudlist = ['1','2','3'];
+  // let foudlist = ['1','2','3'];
   const body = document.body;
   let text = ''
   if(isclick){
@@ -85,23 +86,30 @@ function Home(){
 
   //以下内容为实现列表自定义的函数
   function pushlist(){
-    let newlist1 = prompt('请输入新的列表项','')
-      foudlist.push(newlist1)
-      console.log(foudlist)
+    let newlist1 = foudlist
+    let newlistchild1 = prompt('请输入新的列表项','')
+    if(newlistchild1 !== null){
+      newlist1.push(newlistchild1)
+    }
+    setfoudlist(newlist1)
+    console.log(newlist1)
   }
 
   function poplist(){
-    let newlist2 = prompt('请输入新的列表项','')
-      foudlist.pop(newlist2)
-      console.log(foudlist)
+    let newlist2 = foudlist
+    let newlistchild2 = prompt('请输入要删除的列表项','')
+    newlist2 = newlist2.filter(arr => arr !== newlistchild2)
+    setfoudlist(newlist2)
+    console.log(newlist2)
   }
 
   function showlist(){
+    alert(foudlist)
     console.log(foudlist)
   }
 
   function clearlist(){
-    foudlist = []
+    setfoudlist([])
     console.log(foudlist)
   }
 

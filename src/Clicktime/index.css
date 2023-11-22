@@ -1,0 +1,9 @@
+.floating-text {
+  position: absolute;
+  color: #000;
+  opacity: 0; /* 初始不可见 */
+  transition: opacity 2s; /* 添加渐入渐出过渡效果，持续1秒 */
+  top: 0px;
+  left: 0px;
+  font-size: 0px;
+}
