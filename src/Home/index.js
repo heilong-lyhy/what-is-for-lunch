@@ -8,81 +8,189 @@ function Home(){
   const [foudlist, setfoudlist] = useState(['1','2','3'])
   const [textElements, settextElements] = useState([])
   const [clickkey, setclickkey] = useState(0);
-  const [isclick, setisclick] = useState(true);
+  const [isclick, setisclick] = useState(false);
   // let isclick = false;
   // let foudlist = ['1','2','3'];
   const body = document.body;
   let text = ''
-  let torf = false
   if(isclick){
-    text = '开始'
-  }else{
     text = '结束'
+  }else{
+    text = '开始'
   }
   
-  
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     console.log(isclick);
+  //   }, 100);
+
+  //   return () => clearInterval(interval);
+  // }, [isclick]);
   
   //以下为点击按钮后背景渐入渐出文字的函数
   // setTimeout(() => {
   //   setistime(istime+1)
   //   console.log(istime)
   // }, 1000);
+
+
+  useEffect(() => {
+    let intervalId;
+
+    function clicktime() {
+      if (isclick) {
+        for (let i = 0; i < 1; i++) { // 创建1个文本
+          const randomIndex = Math.floor(Math.random() * foudlist.length);
+          const randomText = foudlist[randomIndex];
+          setistext(randomText)
+          let textElement = document.createElement("div");
+          textElement.textContent = randomText;
+          textElement.className = "floating-text";
+  
+          // 设置随机位置
+          const maxX = window.innerWidth - textElement.clientWidth;
+          const maxY = window.innerHeight - textElement.clientHeight;
+          const randomX = Math.random() * maxX;
+          const randomY = Math.random() * maxY;
+          textElement.style.left = randomX + "px";
+          textElement.style.top = randomY + "px";
+  
+          // // 设置随机字体大小
+          const randomSize = Math.floor(Math.random() * 30) + 12;
+          textElement.style.fontSize = randomSize + "px";
+  
+          // 添加文本到页面
+          body.appendChild(textElement);
+  
+          // 渐入效果
+          setTimeout(() => {
+            textElement.style.opacity = 1;
+          }, 1000);
+  
+          // 自动移除文本
+          setTimeout(() => {
+            // 渐出效果
+            textElement.style.opacity = 0;
+            setTimeout(() => {
+              body.removeChild(textElement);
+            }, 1000); // 渐出效果持续2秒
+          }, 2000); // 文本显示2秒后移除
+        }
+  
+        // 继续下一个文本的动画
+        intervalId = setTimeout(clicktime, 300);
+      }
+    }
+
+    clicktime();
+
+    return () => {
+      clearTimeout(intervalId);
+    };
+  }, [isclick]);
+
+
+
   function click(){
     if(isclick){
-      clicktime();
       setisclick(false)
-      torf = false
     }else{
       setisclick(true)
-      torf = true
     }
   }
 
 
-  function clicktime() {
-    if(isclick){
-      for (let i = 0; i < 1; i++) { // 创建1个文本
-        const randomIndex = Math.floor(Math.random() * foudlist.length);
-        const randomText = foudlist[randomIndex];
-        setistext(randomText)
-        let textElement = document.createElement("div");
-        textElement.textContent = randomText;
-        textElement.className = "floating-text";
+  // function clicktime() {
+  //   if(isclick){
+  //     for (let i = 0; i < 1; i++) { // 创建1个文本
+  //       const randomIndex = Math.floor(Math.random() * foudlist.length);
+  //       const randomText = foudlist[randomIndex];
+  //       setistext(randomText)
+  //       let textElement = document.createElement("div");
+  //       textElement.textContent = randomText;
+  //       textElement.className = "floating-text";
 
-        // 设置随机位置
-        const maxX = window.innerWidth - textElement.clientWidth;
-        const maxY = window.innerHeight - textElement.clientHeight;
-        const randomX = Math.random() * maxX;
-        const randomY = Math.random() * maxY;
-        textElement.style.left = randomX + "px";
-        textElement.style.top = randomY + "px";
+  //       // 设置随机位置
+  //       const maxX = window.innerWidth - textElement.clientWidth;
+  //       const maxY = window.innerHeight - textElement.clientHeight;
+  //       const randomX = Math.random() * maxX;
+  //       const randomY = Math.random() * maxY;
+  //       textElement.style.left = randomX + "px";
+  //       textElement.style.top = randomY + "px";
 
-        // // 设置随机字体大小
-        const randomSize = Math.floor(Math.random() * 30) + 12;
-        textElement.style.fontSize = randomSize + "px";
+  //       // // 设置随机字体大小
+  //       const randomSize = Math.floor(Math.random() * 30) + 12;
+  //       textElement.style.fontSize = randomSize + "px";
 
-        // 添加文本到页面
-        body.appendChild(textElement);
+  //       // 添加文本到页面
+  //       body.appendChild(textElement);
 
-        // 渐入效果
-        setTimeout(() => {
-          textElement.style.opacity = 1;
-        }, 1000);
+  //       // 渐入效果
+  //       setTimeout(() => {
+  //         textElement.style.opacity = 1;
+  //       }, 1000);
 
-        // 自动移除文本
-        setTimeout(() => {
-          // 渐出效果
-          textElement.style.opacity = 0;
-          setTimeout(() => {
-            body.removeChild(textElement);
-          }, 1000); // 渐出效果持续2秒
-        }, 2000); // 文本显示2秒后移除
-      }
+  //       // 自动移除文本
+  //       setTimeout(() => {
+  //         // 渐出效果
+  //         textElement.style.opacity = 0;
+  //         setTimeout(() => {
+  //           body.removeChild(textElement);
+  //         }, 1000); // 渐出效果持续2秒
+  //       }, 2000); // 文本显示2秒后移除
+  //     }
 
-      // 继续下一个文本的动画
-      setTimeout(clicktime, 300);
-    }
-  }
+  //     // 继续下一个文本的动画
+  //     setTimeout(clicktime, 300);
+  //   }
+  // }
+
+  // function clicktime() {
+  //   const intervalId = setInterval(() => {
+  //     if(isclick){
+  //       for (let i = 0; i < 1; i++) { // 创建1个文本
+  //         const randomIndex = Math.floor(Math.random() * foudlist.length);
+  //         const randomText = foudlist[randomIndex];
+  //         setistext(randomText)
+  //         let textElement = document.createElement("div");
+  //         textElement.textContent = randomText;
+  //         textElement.className = "floating-text";
+  
+  //         // 设置随机位置
+  //         const maxX = window.innerWidth - textElement.clientWidth;
+  //         const maxY = window.innerHeight - textElement.clientHeight;
+  //         const randomX = Math.random() * maxX;
+  //         const randomY = Math.random() * maxY;
+  //         textElement.style.left = randomX + "px";
+  //         textElement.style.top = randomY + "px";
+  
+  //         // // 设置随机字体大小
+  //         const randomSize = Math.floor(Math.random() * 30) + 12;
+  //         textElement.style.fontSize = randomSize + "px";
+  
+  //         // 添加文本到页面
+  //         body.appendChild(textElement);
+  
+  //         // 渐入效果
+  //         setTimeout(() => {
+  //           textElement.style.opacity = 1;
+  //         }, 1000);
+  
+  //         // 自动移除文本
+  //         setTimeout(() => {
+  //           // 渐出效果
+  //           textElement.style.opacity = 0;
+  //           setTimeout(() => {
+  //             body.removeChild(textElement);
+  //           }, 1000); // 渐出效果持续2秒
+  //         }, 2000); // 文本显示2秒后移除
+  //       }
+  //     } else {
+  //       clearInterval(intervalId);
+  //     }
+  //   }, 300);
+  // }
+  
 
 
   // function clicktime(clickis) {
