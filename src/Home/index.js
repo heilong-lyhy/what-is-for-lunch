@@ -5,7 +5,58 @@ import Btn from '../Btn'
 
 function Home(){
   const [istext, setistext] = useState('什么');
-  const [foudlist, setfoudlist] = useState(['1','2','3'])
+  const [foudlist, setfoudlist] = useState([
+    "宫保鸡丁",
+    "麻婆豆腐",
+    "糖醋排骨",
+    "叉烧包",
+    "小笼包",
+    "酸辣汤",
+    "西红柿炒鸡蛋",
+    "鱼香肉丝",
+    "水煮鱼",
+    "干煸四季豆",
+    "寿司",
+    "拉面",
+    "火锅",
+    "炸鸡唐揚",
+    "丼饭",
+    "寿喜烧",
+    "章鱼烧",
+    "红豆蛋糕",
+    "玉子烧",
+    "乌冬面",
+    "意大利面",
+    "披萨",
+    "意式咖啡",
+    "青酱意面",
+    "帕尔玛火腿",
+    "鸡肉千层面",
+    "提拉米苏",
+    "意式烩饭",
+    "美乃滋通心粉",
+    "意式牛排",
+    "法式奶油面包",
+    "法式洋葱汤",
+    "羊排",
+    "奶油蜗牛",
+    "欧式巧克力蛋糕",
+    "香槟",
+    "鸭肝酱",
+    "法式炖鱼",
+    "法式羊肉煎饼",
+    "法式焗饭",
+    "巧克力蛋糕",
+    "提拉米苏",
+    "冰淇淋",
+    "抹茶拿铁",
+    "水果沙拉",
+    "芒果冰沙",
+    "法式奶酪蛋糕",
+    "奶茶",
+    "蓝莓酥皮塔",
+    "桃子果冻"
+  ])
   const [textElements, settextElements] = useState([])
   const [clickkey, setclickkey] = useState(0);
   const [isclick, setisclick] = useState(false);
@@ -269,12 +320,15 @@ function Home(){
   return(
     <>
       <div className="main">
-        <span className='s-title'>今天中午吃<h3>{istext}</h3></span>
-        <Btn ic={isclick} click={click} text={text}/>
-        <Btn text={'添加列表项'} click={pushlist}/>
-        <Btn text={'删除列表项'} click={poplist}/>
-        <Btn text={'显示当前列表'} click={showlist}/>
-        <Btn text={'清空当前列表'} click={clearlist}/>
+        <div className='main-native'>
+          <span className='s-title'>今天中午吃<h3 className='what'>{istext}</h3></span>
+          <br/>
+          <Btn ic={isclick} click={click} text={text}/>
+          <Btn text={'添加列表项'} click={pushlist}/>
+          <Btn text={'删除列表项'} click={poplist}/>
+          <Btn text={'显示当前列表'} click={showlist}/>
+          <Btn text={'清空当前列表'} click={clearlist}/>
+        </div>
       </div>
     </>
   )
