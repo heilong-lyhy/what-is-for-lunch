@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class FloatingTextEffect extends Component {
+function Clicktime(){
   constructor() {
     super();
     this.state = {
@@ -75,16 +75,62 @@ class FloatingTextEffect extends Component {
     }
   }
 
-  render() {
-    return (
-      <div>
-        <button onClick={this.toggleAnimation}>
-          {this.state.isAnimating ? "归队" : "开始特效"}
-        </button>
-        {this.state.textElements}
-      </div>
-    );
-  }
+
+  return (
+    <div>
+      <button onClick={this.toggleAnimation}>
+        {this.state.isAnimating ? "归队" : "开始特效"}
+      </button>
+      {this.state.textElements}
+    </div>
+  );
 }
 
-export default FloatingTextEffect;
+export default Clicktime;
+
+function clicktime() {
+  if(isclick){
+    for (let i = 0; i < 1; i++) { // 创建1个文本
+      setclickkey(n => n+1)
+      const randomIndex = Math.floor(Math.random() * foudlist.length);
+      const randomText = foudlist[randomIndex];
+      setistext(randomText)
+      const textElement = (
+        <div className="floating-text" key={clickkey} 
+        style={{position:"absolute",
+        left:`${Math.random() * (window.innerWidth - 100)}px`,
+        top:`${Math.random() * (window.innerHeight - 70)}px`,
+        fontSize: `${Math.floor(Math.random() * 30) + 12}px`,
+        opacity: 0,
+        transition: 'opacity 2s',
+        }}>{istext}</div>
+      )
+      // 添加文本到页面
+      settextElements(textElements.push(textElement));
+
+      // 渐入效果
+      setTimeout(() => {
+        textElement.props.style.opacity = 1;
+        // this.forceUpdate();
+      }, 1000);
+
+      // 自动移除文本
+      setTimeout(() => {
+        // 渐出效果
+        textElement.props.style.opacity = 0;
+        setTimeout(() => {
+          settextElements(textElements.filter(elem => elem !== textElements))
+          // this.forceUpdate();
+        }, 1000); // 渐出效果持续2秒
+      }, 2000); // 文本显示2秒后移除
+    }
+
+    // 继续下一个文本的动画
+    setTimeout(clicktime, 300);
+  }
+  return(
+  <>
+  {textElements}
+  </>
+  )
+}
