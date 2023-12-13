@@ -1,6 +1,7 @@
 *{
   margin: 0;
   padding: 0;
+  z-index: 1;
 }
 
 h3{
@@ -47,6 +48,7 @@ span{
   text-align: center;
   position: relative;
   top: 33vh;
+  z-index: 10;
 }
 
 /* .button-native{

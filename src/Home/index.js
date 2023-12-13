@@ -20,7 +20,6 @@ function Home(){
     "寿司",
     "拉面",
     "火锅",
-    "炸鸡唐揚",
     "寿喜烧",
     "章鱼烧",
     "红豆蛋糕",
@@ -45,7 +44,6 @@ function Home(){
     "鸭肝酱",
     "法式炖鱼",
     "法式羊肉煎饼",
-    "法式焗饭",
     "巧克力蛋糕",
     "提拉米苏",
     "冰淇淋",
@@ -83,7 +81,7 @@ function Home(){
           // 设置随机位置
           const maxX = window.innerWidth - textElement.clientWidth;
           const maxY = window.innerHeight - textElement.clientHeight;
-          const randomX = Math.random() * maxX - 50;
+          const randomX = Math.random() * maxX - 70;
           const randomY = Math.random() * maxY - 70;
           textElement.style.left = randomX + "px";
           textElement.style.top = randomY + "px";
@@ -111,7 +109,7 @@ function Home(){
         }
   
         // 继续下一个文本的动画
-        intervalId = setTimeout(clicktime, 300);
+        intervalId = setTimeout(clicktime, 100);
       }
     }
 
@@ -159,6 +157,11 @@ function Home(){
     console.log(foudlist)
   }
 
+  function caidan(){
+    alert('彩蛋')
+    let schoollist = ["麻辣香锅","鸡排饭","石锅拌饭","嚼色炸鸡","关东煮","麻辣烫","米线","拌面","卤肉饭","猪肚鸡","自选餐","新大楼","铁板"]
+    setfoudlist(schoollist)
+  }
 
 
   return(
@@ -172,6 +175,7 @@ function Home(){
           <Btn text={'删除列表项'} click={poplist}/>
           <Btn text={'显示当前列表'} click={showlist}/>
           <Btn text={'清空当前列表'} click={clearlist}/>
+          <Btn text={'彩蛋'} click={caidan}/>
         </div>
       </div>
     </>
